@@ -25,7 +25,7 @@ char *ft_search_envlist(char *key)
     }
     return(NULL);
 }
-static int cd_error_msg(char *err_msg)
+int error_msg(char *err_msg)
 {
     printf("minishell:cd:'%s:No such file or directory\n",err_msg);
     return(1);

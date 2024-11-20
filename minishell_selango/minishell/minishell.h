@@ -74,16 +74,30 @@ int ft_env(void);
 void *ft_garbage_collector(void *ptr,bool clean);
 void envlist_add_to_back(t_env *new);
 void envlist_updating (char *key, char *value, bool flag);
-
-//cd builtin fn
+/*----------builtin function-----------*/
+//cd  fn
 int ft_cd(char *path);
 //cd_utilis
 char *ft_search_envlist(char *key);
-static int cd_error_msg(char *err_msg);
-//echo builtin fn
+int error_msg(char *err_msg);
+//echo  fn
 int ft_echo(char **argv);
-//pwd builtin fn
+//pwd  fn
 int	ft_pwd(void);
+//exit fn
+void ft_exit(char **argv);
+//export fn
+int ft_valid(char *str);
+int ft_export(char **argv);
+//unset fn
+int ft_unset(char **argv);
+
+
+/*-----execution fn------*/
+int ft_error_msg(t_error err);
+
+/*-----cleaning environment-----*/
+void ft_clear_msg();
 
 
 #endif

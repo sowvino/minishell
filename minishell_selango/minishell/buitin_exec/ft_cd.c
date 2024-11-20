@@ -39,7 +39,7 @@ int ft_cd(char *path)
     if(!path)
         return(ft_home());
     if(chdir(path) != 0)
-        return(cd_error_msg(path));
+        return(error_msg(path));
     envlist_updating("OLDPWD",ft_search_envlist("PWD"),false);
     return(ft_pwd());
 }

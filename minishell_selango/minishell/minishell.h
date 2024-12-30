@@ -6,6 +6,8 @@
 #include <readline/readline.h>
 #include <unistd.h>
 #include <limits.h>
+#include <sys/wait.h>
+#include "parsing.h"
 
 
 typedef struct s_env
@@ -50,6 +52,12 @@ typedef enum e_error_msg
 	ERR_TOO_MANY_ARGUMENTS,
 	ERR_NUMERIC_REQUIRED
 } t_error_msg;
+/*ast direction*/
+typedef enum e_ast_direction
+{
+	TD_LEFT,
+	TD_RIGHT
+}	t_ast_direction
 
 /*error msg struct*/
 typedef struct 	s_error
@@ -57,9 +65,13 @@ typedef struct 	s_error
 	t_error_num 	no;
 	t_error_msg msg;
 	char *report;
-
 }	t_error;
-
+/*env path variable*/
+typedef struct env_s_path
+{
+	t_error error;
+	char *path;
+}	env_t_path;
 
 extern t_minishell minishell_global;
 
@@ -95,9 +107,19 @@ int ft_unset(char **argv);
 
 /*-----execution fn------*/
 int ft_error_msg(t_error err);
+/*----Environment Path-----*/
+env_t_path ft_env_path(char *path,char *cmd);
+env_t_path ft_get_exec_path(char *cmd);
+/*------check the permission for Execution-------*/
+t_error ft_exec_check(char *file,bool cmd);
+t_error ft_read_check(char *file);
+t_error ft_write_check(char *file);
+/*-------exec_pipe-------*/
+int get_signal_status(int status);
 
 /*-----cleaning environment-----*/
 void ft_clear_msg();
+
 
 
 #endif

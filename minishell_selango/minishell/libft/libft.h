@@ -42,6 +42,7 @@ void				*ft_calloc(size_t nelem, size_t elsize);
 char				*ft_strdup(const char *src);
 char				*ft_substr(const char *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoin_with_sep(char *s1,char *s2,char c);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);
@@ -51,6 +52,8 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
+void 				ft_free_array(char **tofree);
+void    			ft_free_array2(char ***tofree);
 
 typedef struct s_list
 {

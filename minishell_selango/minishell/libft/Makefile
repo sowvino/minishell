@@ -37,6 +37,7 @@ MY_SOURCES = ft_atoi.c\
 			 ft_toupper.c\
 			 ft_printf.c\
 			 utilis.c\
+			 ft_free.c\
 			 get_next_line.c\
 			 get_next_line_utilis.c\
 			

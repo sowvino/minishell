@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <readline/readline.h>
+#include <signal.h>
 #include <unistd.h>
 #include <limits.h>
 #include <sys/wait.h>
@@ -25,8 +26,13 @@ typedef struct s_minishell
 	int ministdout;
 	char *line;
 	int exit_str;
-
-
+	t_token			*tokens;
+	t_token			*current_token;
+	t_pars_error	pars_error;
+	t_node			*ast;
+	struct termios	terminal_settings;
+	bool			heredoc_sigint;
+	bool			sigint_child;
 }               t_minishell;
 
 /*ENUM types are user defined types .*Used to assign names to integral constants.
@@ -105,17 +111,31 @@ int ft_export(char **argv);
 int ft_unset(char **argv);
 
 
-/*-----execution fn------*/
+/*-------------------------------------execution fn-----------------*/
+/*-----error_msg----------*/
 int ft_error_msg(t_error err);
-/*----Environment Path-----*/
+
+/*----------default execution------ */
+bool default_checker(char **argv);
+int ft_default_exec(char **argv);
+/*---- Path_execution-----*/
 env_t_path ft_env_path(char *path,char *cmd);
 env_t_path ft_get_exec_path(char *cmd);
-/*------check the permission for Execution-------*/
+/*------ft_check_permission------*/
 t_error ft_exec_check(char *file,bool cmd);
 t_error ft_read_check(char *file);
 t_error ft_write_check(char *file);
-/*-------exec_pipe-------*/
+/*-------execution_pipe-------*/
 int get_signal_status(int status);
+int ft_exec_branch(t_node *branchtree,bool pipe);
+/*--------redirect_execution---------*/
+int ft_output_redirect(t_io_node *io_list,int * status,bool is_append);
+int ft_input_redirect(t_io_node *io_list,int *status);
+/*--------simple_cmd_execution-------*/
+int redirect_exec_check(t_node *node);
+void ft_reset_state(bool pipe);
+int simple_cmd(t_node *node ,bool pipe);
+
 
 /*-----cleaning environment-----*/
 void ft_clear_msg();
